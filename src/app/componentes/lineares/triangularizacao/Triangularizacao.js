@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import MathMLMatrix from '../../matriz/Matrix'
 
 const MatrixInput = () => {
   const [matrix, setMatrix] = useState([
-        [2, -2, 1, 3],
-        [1, 3, -2, 1],
-        [3, -1, -1, 2],
+        [2, 3, 5, 23],
+        [-4, 1, -8, -26],
+        [6, -12, 12, 18],
       ]);
+    
+  const [steps, setSteps] = useState('');
 
   const [resultMatrix, setResultMatrix] = useState([]); 
 
@@ -46,7 +49,8 @@ const MatrixInput = () => {
     axios.post('http://127.0.0.1:8000/api/matrix/triangularize/', matrixData)
       .then((response) => {
         console.log('Matriz triangularizada com sucesso:', response.data);
-        setResultMatrix(response.data.result);
+        setResultMatrix(response.data.matrix);
+        setSteps(response.data.pasos)
         // Faça algo com a resposta, se necessário
       })
       .catch((error) => {
@@ -54,6 +58,7 @@ const MatrixInput = () => {
       });
   };
 
+  const stepArray = steps.split('\n').filter(step => step.trim() !== '');
 
   return (
     <div className="bg-white flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -103,32 +108,37 @@ const MatrixInput = () => {
                 
             </div>
         </div>
+
+{/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ }
+
+        
         <div className="mt-5 sm:mx-auto sm:w-full">
-        <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Matriz Resultante
-        </h2>
-        <div className="flex justify-center mt-5">
-          <div className="mx-auto p-5 border-2 border-x-orange-900 text-center inline-block">
-            {resultMatrix.map((row, rowIndex) => (
-              <div key={rowIndex} className="flex">
-                {row.map((value, colIndex) => (
-                  <div key={colIndex}>
-                    <input
-                      className={`w-20 border-2 m-0.5 border-x-slate-700 ${
-                        colIndex === row.length - 1 ? 'bg-slate-300 ml-3' : ''
-                      }`}
-                      type="number"
-                      value={value}
-                      readOnly // Impede que o usuário edite a matriz resultante
-                    />
-                  </div>
-                ))}
-              </div>
-            ))}
+          <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Matriz Resultante
+          </h2>
+          <div className="flex justify-center mt-5">
+            <div className="mx-auto p-5 border-2 border-x-orange-900 text-center inline-block">
+              <MathMLMatrix matrix={resultMatrix} />
+            </div>
           </div>
         </div>
+        
+       
+
+        <div className="">
+          <h2>Passo a Passo da Triangularização</h2>
+          <ol>
+            {stepArray.map((step, index) => (
+              <li key={index}>{step}</li>
+            ))}
+          </ol>
+        </div>
+
+        
+
+
       </div>
-    </div>
+    
     
   );
 };

@@ -1,12 +1,12 @@
 'use client'
 import { useState } from 'react';
 import axios from 'axios';
-import Eliminacao from '../../componentes/lineares/elimenacaodireta/Eliminacao'
+import GuassJordan from '../../componentes/lineares/gausjordan/GuassJordan'
 
 export default function LinearSystemSolver() {
 
 
   return (
-    <Eliminacao/>
+    <GuassJordan/>
   );
 }
