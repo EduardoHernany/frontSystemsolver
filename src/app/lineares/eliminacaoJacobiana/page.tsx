@@ -1,12 +1,12 @@
 'use client'
 import { useState } from 'react';
 import axios from 'axios';
-import Triangularizacao from '../../componentes/lineares/triangularizacao/Triangularizacao'
+import Jacobi from '../../componentes/lineares/jacobiana/Jacobi'
 
 export default function LinearSystemSolver() {
 
 
   return (
-    <Triangularizacao/>
+    <Jacobi/>
   );
 }

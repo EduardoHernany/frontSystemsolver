@@ -1,12 +1,12 @@
 'use client'
 import { useState } from 'react';
 import axios from 'axios';
-import Triangularizacao from '../../componentes/lineares/luDecomposion/LU'
+import Newton from '../../componentes/naoLineares/Newton'
 
 export default function LinearSystemSolver() {
  
 
   return (
-    <Triangularizacao/>
+    <Newton/>
   );
 }

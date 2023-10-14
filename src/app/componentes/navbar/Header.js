@@ -14,11 +14,11 @@ function ResponsiveAppBar() {
     { label: 'Eliminação Gaussiana', descricao: 'Metodo Não-Interativo' ,link: '/lineares/eliminacaoGaussiana' },
     { label: 'Eliminação de Gauss-Jordan', descricao: 'Metodo Não-Interativo' ,link: '/lineares/eliminacaoGaussJordan' },
     { label: 'Eliminação LU', descricao: 'Metodo Não-Interativo' ,link: '/lineares/eliminacaoLU' },
-    { label: 'Eliminação Jacobiana', descricao: 'Metodo Interativo' ,link: '/lineares/eliminacaoJacobiana' },
+    { label: 'Eliminação Gauss Seide', descricao: 'Metodo Interativo' ,link: '/lineares/eliminacaoJacobiana' },
   ];
   
   const dropdownOptionsNL = [
-    { label: 'Eliminação de Newton', descricao: 'Eliminação de Newton nao linear' ,link: '/lineares/eliminacao-direta' },
+    { label: 'Eliminação de Newton', descricao: 'Eliminação de Newton nao linear' ,link: '/naoLinear/newton' },
   ];
 
   return (
@@ -27,9 +27,7 @@ function ResponsiveAppBar() {
       <div className="flex lg:flex-1">
         <a href="#" className="-m-1.5 p-1.5">
       
-          <img
-              className="h-8 w-auto" src="/next.svg" alt=""
-            />
+          
         </a>
       </div>
     

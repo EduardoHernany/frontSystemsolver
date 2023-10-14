@@ -2,8 +2,18 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import MathMLMatrix from '../../matriz/Matrix';
 import { TiArrowDownThick } from 'react-icons/ti';
-
+import Modal from '../../modals/ModalGaus'
 const MatrixInput = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   const initialMatrix = [
         [2, 3, 5, 23],
         [-4, 1, -8, -26],
@@ -57,6 +67,12 @@ const MatrixInput = () => {
 
   return (
     <div className="bg-white flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+       <div>
+                <button className="mt-1 w-50 justify-center rounded-md bg-slate-800 px-2 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={handleOpenModal}>Ver Tutorial</button>
+
+                <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
+              </div> 
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="border-t-2 border-x-orange-900 mt-3 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
         Gaussianaa

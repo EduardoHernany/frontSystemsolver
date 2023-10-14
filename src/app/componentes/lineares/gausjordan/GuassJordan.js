@@ -2,13 +2,26 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import MathMLMatrix from '../../matriz/Matrix';
 import { TiArrowDownThick } from 'react-icons/ti';
+import Modal from '../../modals/ModalJordan'
 
 const MatrixInput = () => {
   const initialMatrix = [
-    [1, 1, 2, 4],
-    [2, -1, -1, 0],
-    [1, -1, -1, -1],
+        [2, 3, 5, 23],
+        [-4, 1, -8, -26],
+        [6, -12, 12, 18],
+  
   ];
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
 
   const [matrix, setMatrix] = useState(initialMatrix);
   const [steps, setSteps] = useState('');
@@ -56,6 +69,13 @@ const MatrixInput = () => {
 
   return (
     <div className="bg-white flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div>
+                <button className="mt-1 w-50 justify-center rounded-md bg-slate-800 px-2 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={handleOpenModal}>Ver Tutorial</button>
+
+                <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
+              </div>  
+            
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="border-t-2 border-x-orange-900 mt-3 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
         Jordan
@@ -108,6 +128,7 @@ const MatrixInput = () => {
           </button>
         </div>
       </div>
+{/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ }
 
       <div className="mt-5 sm:mx-auto sm:w-full">
         <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -123,15 +144,15 @@ const MatrixInput = () => {
                     <div className="p-4 flex">
                       <MathMLMatrix matrix={matrix} />
                       <div className="border-l-2 pl-6 border-orange-900 flex ml-6 flex-col justify-items-start items-start">
-                        Matrix triangularizada
+                        Matrix escalonada reduzida por linhas.
                       </div>
                     </div>
                   ) : (
                     <>
                       <MathMLMatrix matrix={matrix} />
                       <div className="border-l-2 pl-6 border-orange-900 flex ml-6 flex-col justify-items-start items-start">
-                        <span>Passo: {steps[index]?.step_number}</span>
-                        <span>Pivô: {steps[index]?.pivo}</span>
+                        <span>Passo: {index+1}</span>
+                        {steps[index].pivot ? <span>Pivô: {steps[index]?.pivot}</span>: <></>}
                         <span>Factor: {steps[index]?.factor}</span>
                         <span>{steps[index]?.operation}</span>
                       </div>
